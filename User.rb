@@ -2,14 +2,19 @@ class User
 	$session = ""
 	$user = ""
 	$i = 1
+	$all_users = []
+
+def self.sign_up(username, password)
+	User.new(username, password, [])
+end
 
 attr_accessor :username, :password, :tweet_history
 
 def initialize(username, password, tweet_history)
-	puts "Can't be nil try again" if username == nil || password == nil
 	@username = username
 	@password = password
 	@tweet_history = tweet_history
+	$all_users.push({username:@username, password:@password})
 end
 
 def sign_in(username_input, password_input)
@@ -19,7 +24,6 @@ def sign_in(username_input, password_input)
 	if username_input == @username && password_input == @password
 		message = "Login successful" 
 		$session = self
-		$user = self
 	end					
 end
 

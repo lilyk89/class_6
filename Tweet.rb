@@ -1,7 +1,7 @@
 class Tweet
 	$history = []
 
-	def self.show_all()
+	def self.show_all
 		puts $history
 	end
 
