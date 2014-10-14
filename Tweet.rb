@@ -1,35 +1,42 @@
 class Tweet
-	$history = []
+	@@all_tweets = []
+	$i = 0
 
-	def self.show_all
-		puts $history
+	def self.all_tweets
+		@@all_tweets
 	end
 
-	def self.summarize(number)
-		$history.each do |tweet|
-			if tweet[:tweet_number] == number
+	def self.summarize(n)
+		@@all_tweets.each do |tweet|
+			if tweet[:number] == n
 				puts "Welcome to your tweet: \n
-				Tweet number: #{tweet[:tweet_number]}. \n
-				Author: #{tweet[:tweet_author]}. \n
-				Time: #{tweet[:tweet_time]}. \n
-				Text: #{tweet[:tweet_text]}"
+				Tweet number: #{tweet[:number]}. \n
+				Author: #{tweet[:author]}. \n
+				Time: #{tweet[:time]}. \n
+				Text: #{tweet[:text]}.
+				Likes: #{:likes}\n
+				"
 			end
 		end
 	end
 
 
 # tweets don't have titles, pssh
-attr_accessor :tweet_number, :tweet_author, :tweet_time, :tweet_text
+attr_accessor :number, :author, :time, :text, :likes
 
-def initialize(tweet_number, tweet_author, tweet_time, tweet_text)
-	@tweet_number = tweet_number
-	@tweet_author = tweet_author
-	@tweet_time = tweet_time
-	@tweet_text = tweet_text
+def initialize(author, text)
+	time = Time.new
+	@number = $i
+	@author = author
+	@time = time.inspect
+	@text = text
+	@likes = []
+	@@all_tweets.push(self)
+	$i +=1
 end
 
-def store()
-	$history.push({tweet_number:@tweet_number, tweet_author:@tweet_author, tweet_time:@tweet_time, tweet_text:@tweet_text})
+def count_likes
+	@likes.count
 end
 
 end
